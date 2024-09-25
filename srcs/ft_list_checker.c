@@ -10,36 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
-int	ft_atoi(char *str)
-{
-	long int	num;
-	int			flag;
-
-	flag = 1;
-	num = 0;
-	while ((*str >= 9 && *str <= 13) || *str == 32)
-		str++;
-	if (*str == '-')
-	{
-		str++;
-		flag = -1;
-	}
-	else if (*str == '+')
-		str++;
-	while (*str >= 48 && *str <= 57)
-	{
-		num = num * 10 + (flag * (*str++ - 48));
-		if (num > 2147483647)
-			return (-1);
-		if (num < -2147483648)
-			return (0);
-	}
-	return (num);
-}
-
-void	isasc(char *s[])
+static void	isasc(char **s)
 {
 	int	i;
 	int	j;
@@ -62,7 +35,7 @@ void	isasc(char *s[])
 	}
 }
 
-void	isint(char *s[])
+static void	isint(char *s[])
 {
 	int			i;
 	long long	num;
@@ -91,7 +64,7 @@ void	isint(char *s[])
 	}
 }
 
-void	issortedchar(char *s[])
+static void	issortedchar(char *s[])
 {
 	int	i;
 	int	j;
@@ -108,14 +81,14 @@ void	issortedchar(char *s[])
 		exit(1);
 }
 
-void	checker(char *s[], int argc)
+void	list_checker(char **s)
 {
 	int	i;
 	int	j;
 
 	i = 1;
-	if (!s[i] || argc < 2)
-		exit(1);
+	if (data()->ac < 2 || !s[i])
+		error();
 	isasc(s);
 	isint(s);
 	issortedchar(s);

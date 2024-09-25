@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   organize.c                                         :+:      :+:    :+:   */
+/*   ft_organize_lists.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gcatarin <gcatarin@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,81 +10,32 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
-int	issortedint(int *s)
+int	is_a_sorted_int(void)
 {
 	int	i;
 
 	i = 0;
-	while (i < agrs()->size_a - 1)
+	while (i < data()->size_a - 1)
 	{
-		if (s[i] > s[i + 1])
-			return (0);
-		i++;
-	}
-	return (agrs()->size_b == 0);
-}
-
-int	issortedintexcep(int *s)
-{
-	int	i;
-
-	i = 0;
-	while (i < agrs()->size_a - 1)
-	{
-		if (s[i] > s[i + 1])
+		if (data()->a[i] > data()->a[i + 1])
 			return (0);
 		i++;
 	}
 	return (1);
 }
 
-int	maxrad(int *a)
+void	calculate_average(void)
 {
 	int	i;
-	int	max;
 
-	i = 1;
-	max = maximo(a);
-	while (i < max)
-		i *= 2;
-	return (i);
-}
-
-int	ops(int *a, int *b, int radix)
-{
-	int	p;
-
-	p = agrs()->size_a;
-	while (p)
+	i = 0;
+	data()->average = 0;
+	while(data()->a[i])
 	{
-		if (issortedint(a))
-			return (-1);
-		if (a[0] >> radix & 1)
-			ra(a);
-		else
-			pb(a, b);
-		p--;
+		data()->average += data()->a[i];
+		i++;
 	}
-	while (agrs()->size_b > 0)
-		pa(a, b);
-	return (1);
-}
-
-void	organize(int *a, int *b)
-{
-	int	radix;
-
-	radix = 0;
-	if (agrs()->argc <= 6)
-	{
-		excep(agrs()-> argc - 1, a, b);
-		return ;
-	}
-	while (radix < 32 && !issortedint(a))
-	{
-		ops(a, b, radix);
-		radix++;
-	}
+	data()->average /= data()->size_a;
 }

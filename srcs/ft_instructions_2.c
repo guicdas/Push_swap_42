@@ -10,55 +10,40 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
-void	extend(int *a, int size)
+void	sa(void)
 {
-	int	i;
+	int	temp;
 
-	i = size;
-	while (i > 0)
+	if (data()->a)
 	{
-		a[i] = a[i - 1];
-		i--;
+		temp = data()->a[0];
+		data()->a[0] = data()->a[1];
+		data()->a[1] = temp;
+		write(1, "sa\n", 3);
 	}
 }
 
-void	shrink(int *a, int size)
+void	rra(void)
 {
-	int	i;
+	int	temp;
 
-	i = 0;
-	while (i < size - 1)
-	{
-		a[i] = a[i + 1];
-		i++;
-	}
-	a[i] = 0;
+	temp = data()->a[data()->size_a - 1];
+	extend(data()->a, data()->size_a);
+	data()->a[0] = temp;
+	write(1, "rra\n", 4);
 }
 
-void	pa(int *a, int *b)
+void	pa(void)
 {
-	if (b)
+	if (data()->b)
 	{
-		extend(a, agrs()->size_a);
-		a[0] = b[0];
-		shrink(b, agrs()->size_b);
-		agrs()->size_a++;
-		agrs()->size_b--;
+		extend(data()->a, data()->size_a);
+		data()->a[0] = data()->b[0];
+		shrink(data()->b, data()->size_b);
+		data()->size_a++;
+		data()->size_b--;
 		write(1, "pa\n", 3);
 	}
-}
-
-void	pb(int *a, int *b)
-{
-	if (a)
-	{
-		extend(b, agrs()->size_b);
-		b[0] = a[0];
-		shrink(a, agrs()->size_a);
-		agrs()->size_b++;
-		agrs()->size_a--;
-	}
-	write(1, "pb\n", 3);
 }

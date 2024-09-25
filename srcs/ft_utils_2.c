@@ -10,19 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
-
-void	first(int *a, int *b)
-{
-	pa(a, b);
-	sa(a);
-}
-
-void	last(int*a, int *b)
-{
-	pa(a, b);
-	ra(a);
-}
+#include "../push_swap.h"
 
 int	ft_strcmp(char *str1, char *str2)
 {
@@ -40,25 +28,18 @@ int	ft_strcmp(char *str1, char *str2)
 	return (str1[i] - str2[i]);
 }
 
-t_arg	*agrs(void)
-{
-	static t_arg	a;
-
-	return (&a);
-}
-
-int	isinv(int *s)
+int	is_a_inverted(void)
 {
 	int	i;
 
 	i = 0;
-	while (i < agrs()->size_a - 1)
+	while (i < data()->size_a - 1)
 	{
-		if (s[i] < s[i + 1])
+		if (data()->a[i] < data()->a[i + 1])
 			return (0);
 		i++;
 	}
-	sa(s);
-	rra(s);
+	sa();
+	rra();
 	return (1);
 }

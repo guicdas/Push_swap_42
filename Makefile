@@ -16,9 +16,11 @@ RM				= rm -fr
 
 NAME			= push_swap.a
 HEADER			= push_swap.h
+EXE				= push_swap
 
-SOURCES			= srcs/push_swap.c srcs/crialistas.c srcs/checker.c srcs/organize.c \
-				 srcs/exceptions.c srcs/excephelp.c srcs/instructions.c srcs/swap_push.c
+SOURCES			= srcs/ft_push_swap.c srcs/ft_create_lists.c srcs/ft_list_checker.c \
+				srcs/ft_organize_lists.c srcs/ft_five_elements.c srcs/ft_utils_2.c \
+				srcs/ft_instructions_1.c srcs/ft_instructions_2.c srcs/ft_utils_1.c
 
 SOURCES_O		= $(SOURCES:srcs/%.c=objs/%.o)
 
@@ -29,6 +31,9 @@ $(NAME):		$(SOURCES_O)
 
 objs/%.o: srcs/%.c
 	$(CC) $(CFLAGS) -c $^ -o $@
+
+run:	re
+	${CC} ${CFLAGS} ${NAME} -o ${EXE}
 
 clean:
 	$(RM) $(SOURCES_O)

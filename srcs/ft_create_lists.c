@@ -10,93 +10,64 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
-int	*change(int *a)
-{
-	int	j;
-
-	j = 0;
-	while (j < agrs()->argc - 1)
-	{
-		if (a[j] > 0)
-			a[j]++;
-		else if (a[j] == 0)
-			a[j] = 1;
-		j++;
-	}
-	return (a);
-}
-
-int	*crialistaa(char **a, int *l1, int argc)
+static int	get_lowest_value(char **s)
 {
 	int	i;
-	int	zero;
+	int ret;
+	int	highest;
 
-	zero = 0;
-	i = 0;
-	while (i < agrs()->argc - 1)
+	i = 1;
+	highest = 0;
+	ret = -1;
+	while (i < data()->size_a + 1)
 	{
-		l1[i] = ft_atoi(a[i + 1]);
-		if (l1[i] == 0 && i < argc - 1)
-			zero = i;
-		i++;
-	}
-	if (zero > 0)
-		l1 = change(l1);
-	return (l1);
-}
-
-int	islowest(int *a, int i)
-{
-	int	j;
-
-	j = 0;
-	while (j < agrs()->argc - 1)
-	{
-		if (j == i)
-			j++;
-		else if (a[i] < a[j])
-			j++;
-		else
-			return (-1);
-	}
-	return (i);
-}
-
-void	tratal(int *a, int *temp)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	while (i < agrs()->argc - 1)
-	{
-		j = 0;
-		temp[i] = 1;
-		while (j < agrs()->argc - 1)
+		if (ret < ft_atoi(s[i]))
 		{
-			if (a[i] > a[j])
-				temp[i]++;
-			j++;
+			ret = ft_atoi(s[i]);
+			highest = i;
+			
 		}
 		i++;
 	}
+	printf("highest %d - ret %d\n", highest, ret);
+	return (highest);
 }
 
-int	*tratalista(int *a, int *b, int ac)
+static void	fill_list_a(char **s)
 {
-	int	*temp;
+	int	i;
+	int j;
 
-	temp = (int *)malloc(sizeof(int) * ac);
-	if (!temp)
+	i = 0;
+	j = 1;
+	while (s[j])
 	{
-		free(a);
-		free(b);
+		data()->a[get_lowest_value(s)] = j;
+		i++;
+		j++;
+	}
+	debug();
+}
+
+void	create_lists(char **s)
+{
+	data()->a = ft_calloc(sizeof(int), data()->ac);
+	if (!data()->a)
+		exit(1);
+	data()->b = ft_calloc(sizeof(int), data()->ac);
+	if (!data()->b)
+	{
+		free(data()->a);
 		exit(1);
 	}
-	tratal(a, temp);
-	free(a);
-	return (temp);
+	data()->bf = ft_calloc(sizeof(int), data()->ac);
+	if (!data()->bf)
+	{
+		free(data()->b);
+		free(data()->a);
+		exit(1);
+	}
+	fill_list_a(s);
 }
