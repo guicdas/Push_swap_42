@@ -19,9 +19,39 @@ t_data	*data(void)
 	return (&a);
 }
 
+static int		get_bestfriend_equal(int j)
+{
+	int	i;
+
+	i = 0;
+	while (i < data()->size_a)
+	{
+		if (j == data()->a[i])
+			return (i);
+		i++;
+	}
+	return (0);
+}
+
+static void	move_numbers(int i)
+{
+	int counter;
+
+	counter = i;
+	while (counter--) // melhorar
+		rb();
+	
+	counter = get_bestfriend_equal(data()->bf[i]);
+	while (counter--) // melhorar
+		ra();
+	pa();
+}
+
 static void	organize_lists(void)
 {
-	
+	int	i;
+
+	i = 0;
 	while (data()->size_a > 5)
 	{
 		calculate_average();
@@ -31,8 +61,15 @@ static void	organize_lists(void)
 			ra();
 	}
 	sort_5();
-	calculate_bestfriends();
-	calculate_costs();
+	while (data()->size_b != 0)
+	{
+		calculate_bestfriends();
+		i = decide_operation();
+		move_numbers(i);
+	}
+	while (data()->a[0] != 1)
+		rra();
+	debug();
 }
 
 int	main(int ac, char **av)

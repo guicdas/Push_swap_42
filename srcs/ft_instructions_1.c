@@ -53,6 +53,25 @@ void	ra(void)
 	write(1, "ra\n", 3);
 }
 
+void	rb(void)
+{
+	int	i;
+	int	temp;
+
+	i = 0;
+	if (data()->size_b > 0)
+	{
+		temp = data()->b[0];
+		while (i < data()->size_b - 1)
+		{
+			data()->b[i] = data()->b[i + 1];
+			i++;
+		}
+		data()->b[i] = temp;
+	}
+	write(1, "rb\n", 3);
+}
+
 void	pb(void)
 {
 	if (data()->a)

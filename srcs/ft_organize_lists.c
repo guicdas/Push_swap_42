@@ -81,21 +81,41 @@ static int	get_bestfriend_cost(int n)
 	return (0);
 }
 
-void	calculate_costs(void)
+static int	calculate_costs(int i)
 {
-	int	i;
 	int	ret;
 
-	i = 0;
 	ret = 0;
+	if (i < data()->size_b / 2)
+		ret += i;
+	else
+		ret += data()->size_b - i;
+	ret += get_bestfriend_cost(data()->bf[i]);
+	return (ret);
+}
+
+int	decide_operation(void)
+{
+	int	i;
+	int	place;
+	int	cost;
+	int	previous;
+
+	i = 0;
+	place = 0;
+	cost = 0;
+	previous = 0;
 	while (i < data()->size_b)
 	{
-		ret = 0;
-		if (i < data()->size_b / 2)
-			ret += i;
-		else
-			ret += data()->size_b - i;
-		ret += get_bestfriend_cost(data()->bf[i]);
+		cost = calculate_costs(i);
+		if (cost < previous)
+		{
+			place = i;
+			previous = cost;
+		}
+		if (i == 0)
+			previous = cost;
 		i++;
 	}
+	return (place);
 }
