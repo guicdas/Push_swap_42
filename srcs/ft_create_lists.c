@@ -15,59 +15,46 @@
 static int	get_lowest_value(char **s)
 {
 	int	i;
-	int ret;
-	int	highest;
+	long long ret;
+	int	lowest;
 
 	i = 1;
-	highest = 0;
-	ret = -1;
-	while (i < data()->size_a + 1)
+	lowest = 0;
+	ret = 2147483648;
+	while (i <= data()->size_a)
 	{
-		if (ret < ft_atoi(s[i]))
+		if (ft_strcmp(s[i], "\2") && ret > ft_atoi(s[i]))
 		{
 			ret = ft_atoi(s[i]);
-			highest = i;
-			
+			lowest = i;
 		}
 		i++;
 	}
-	printf("highest %d - ret %d\n", highest, ret);
-	return (highest);
-}
-
-static void	fill_list_a(char **s)
-{
-	int	i;
-	int j;
-
-	i = 0;
-	j = 1;
-	while (s[j])
-	{
-		data()->a[get_lowest_value(s)] = j;
-		i++;
-		j++;
-	}
-	debug();
+	strcpy(s[lowest], "\2");
+	return (lowest);
 }
 
 void	create_lists(char **s)
 {
-	data()->a = ft_calloc(sizeof(int), data()->ac);
+	int	i;
+
+	i = 1;
+	data()->a = ft_calloc(sizeof(int), data()->ac - 1);
 	if (!data()->a)
 		exit(1);
-	data()->b = ft_calloc(sizeof(int), data()->ac);
+	data()->b = ft_calloc(sizeof(int), data()->ac - 1);
 	if (!data()->b)
 	{
 		free(data()->a);
 		exit(1);
 	}
-	data()->bf = ft_calloc(sizeof(int), data()->ac);
+	data()->bf = ft_calloc(sizeof(int), data()->ac - 1);
 	if (!data()->bf)
 	{
 		free(data()->b);
 		free(data()->a);
 		exit(1);
 	}
-	fill_list_a(s);
+	while (s[i])
+		data()->a[get_lowest_value(s) - 1] = i++;
 }

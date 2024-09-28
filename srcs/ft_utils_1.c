@@ -21,7 +21,7 @@ void	debug()
 	printf("\nB: %d\n", data()->size_b);
 	while (i < data()->size_b)
 	{
-		printf("%d\n", data()->b[i]);
+		printf("%d \t %d\n", data()->b[i], data()->bf[i]);
 		i++;
 	}
 	printf("\n");

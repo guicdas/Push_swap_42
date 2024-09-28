@@ -15,6 +15,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <fcntl.h>
+# include <string.h>
 
 typedef struct s_data
 {
@@ -24,9 +25,9 @@ typedef struct s_data
 	int	*b;
 	int	*bf;
 
-	int	size_a;
-	int	size_b;
-	int	average;
+	int		size_a;
+	int		size_b;
+	double	average;
 }	t_data;
 
 t_data	*data(void);
@@ -37,6 +38,8 @@ void	pa(void);
 void	pb(void);
 void	ra(void);
 void	rra(void);
+void	shrink(int *a, int size);
+void	extend(int *a, int size);
 
 //-----	lists	-----//
 void	list_checker(char **s);
@@ -54,9 +57,6 @@ void	*ft_calloc(size_t count, size_t size);
 //-----	is sorted	-----//
 int		is_a_sorted_int(void);
 int		is_a_inverted(void);
-
-//-----	exceptions	-----//
 void	sort_5(void);
-
-void	shrink(int *a, int size);
-void	extend(int *a, int size);
+void	calculate_bestfriends(void);
+void	calculate_costs(void);

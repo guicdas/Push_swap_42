@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 CC				= gcc
-CFLAGS			= -Wall -Wextra -Werror -I./
+CFLAGS			= -Wall -Wextra -Werror -I./ #-fsanitize=address
 RM				= rm -fr
 
 NAME			= push_swap.a

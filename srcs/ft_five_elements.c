@@ -38,16 +38,22 @@ static void	sort_3(void)
 static int	get_lowest_place(void)
 {
 	int	i;
+	int lowest;
+	int ret;
 
 	i = 0;
+	lowest = data()->a[0];
+	ret = 0;
 	while (i < data()->size_a)
 	{
-		if (data()->a[i] == 1)
-			return (i);
+		if (lowest > data()->a[i])
+		{
+			lowest = data()->a[i];
+			ret = i;
+		}
 		i++;
 	}
-	write(2, "Something went wrong", 21);
-	return (-1);
+	return (ret);
 }
 
 static void	push_lowest_to_b(int i)

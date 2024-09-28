@@ -32,10 +32,70 @@ void	calculate_average(void)
 
 	i = 0;
 	data()->average = 0;
-	while(data()->a[i])
+	while (i < data()->size_a)
 	{
 		data()->average += data()->a[i];
 		i++;
 	}
 	data()->average /= data()->size_a;
+}
+
+void	calculate_bestfriends(void)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < data()->size_b)
+	{
+		j = 0;
+		while (j < data()->size_a)
+		{
+			if (data()->a[j] > data()->b[i])
+			{
+				data()->bf[i] = data()->a[j];
+				break ;
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
+static int	get_bestfriend_cost(int n)
+{
+	int	i;
+
+	i = 0;
+	while (i < data()->size_a)
+	{
+		if (n == data()->a[i])
+		{
+			if (i < data()->size_a / 2)
+				return (i);
+			else
+				return (data()->size_a - i);
+		}
+		i++;
+	}
+	return (0);
+}
+
+void	calculate_costs(void)
+{
+	int	i;
+	int	ret;
+
+	i = 0;
+	ret = 0;
+	while (i < data()->size_b)
+	{
+		ret = 0;
+		if (i < data()->size_b / 2)
+			ret += i;
+		else
+			ret += data()->size_b - i;
+		ret += get_bestfriend_cost(data()->bf[i]);
+		i++;
+	}
 }

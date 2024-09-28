@@ -21,6 +21,7 @@ t_data	*data(void)
 
 static void	organize_lists(void)
 {
+	
 	while (data()->size_a > 5)
 	{
 		calculate_average();
@@ -29,21 +30,19 @@ static void	organize_lists(void)
 		else
 			ra();
 	}
-	debug();
 	sort_5();
-	debug();
+	calculate_bestfriends();
+	calculate_costs();
 }
 
 int	main(int ac, char **av)
 {
-	int i =0;
 	data()->ac = ac;
 	data()->size_a = (ac - 1);
 	data()->size_b = 0;
 	list_checker(av);
 	create_lists(av);
-	if (i == 2)
-		organize_lists();
+	organize_lists();
 	free(data()->a);
 	free(data()->b);
 	free(data()->bf);
