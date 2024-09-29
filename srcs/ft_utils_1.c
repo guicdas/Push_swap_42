@@ -10,18 +10,16 @@ void	debug()
 {
 	int	i;
 
-	printf("\nA: %d\n", data()->size_a);
+	printf("\nA: %d\tB: %d\n", data()->size_a, data()->size_b);
 	i = 0;
-	while (i < data()->size_a)
+	while (i <18)
 	{
-		printf("%d\n", data()->a[i]);
-		i++;
-	}
-	i = 0;
-	printf("\nB: %d\n", data()->size_b);
-	while (i < data()->size_b)
-	{
-		printf("%d \t %d\n", data()->b[i], data()->bf[i]);
+		if (data()->a[i])
+			printf("%d", data()->a[i]);
+		if (data()->b[i])
+			printf("\t%d\t%d\n", data()->b[i], data()->bf[i]);
+		else
+			printf("\n");
 		i++;
 	}
 	printf("\n");

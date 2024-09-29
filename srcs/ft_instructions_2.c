@@ -29,10 +29,26 @@ void	rra(void)
 {
 	int	temp;
 
-	temp = data()->a[data()->size_a - 1];
-	extend(data()->a, data()->size_a);
-	data()->a[0] = temp;
-	write(1, "rra\n", 4);
+	if (data()->a)
+	{
+		temp = data()->a[data()->size_a - 1];
+		extend(data()->a, data()->size_a);
+		data()->a[0] = temp;
+		write(1, "rra\n", 4);
+	}
+}
+
+void	rrb(void)
+{
+	int	temp;
+
+	if (data()->b)
+	{
+		temp = data()->b[data()->size_b - 1];
+		extend(data()->b, data()->size_b - 1);
+		data()->b[0] = temp;
+		write(1, "rrb\n", 4);
+	}
 }
 
 void	pa(void)

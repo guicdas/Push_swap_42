@@ -12,20 +12,6 @@
 
 #include "../push_swap.h"
 
-int	is_a_sorted_int(void)
-{
-	int	i;
-
-	i = 0;
-	while (i < data()->size_a - 1)
-	{
-		if (data()->a[i] > data()->a[i + 1])
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
 void	calculate_average(void)
 {
 	int	i;

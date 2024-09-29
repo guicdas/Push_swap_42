@@ -81,13 +81,13 @@ static void	issortedchar(char *s[])
 		exit(1);
 }
 
-void	list_checker(char **s)
+void	list_checker(int ac, char **s)
 {
 	int	i;
 	int	j;
 
 	i = 1;
-	if (data()->ac < 2 || !s[i])
+	if (ac < 2 || !s[i])
 		error();
 	isasc(s);
 	isint(s);
@@ -97,7 +97,7 @@ void	list_checker(char **s)
 		j = i + 1;
 		while (s[j])
 		{
-			if ((ft_atoi(s[i]) == ft_atoi(s[j])))
+			if (ft_atoi(s[i]) == ft_atoi(s[j]))
 				error();
 			j++;
 		}

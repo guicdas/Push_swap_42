@@ -19,8 +19,6 @@
 
 typedef struct s_data
 {
-	int	ac;
-
 	int	*a;
 	int	*b;
 	int	*bf;
@@ -39,11 +37,12 @@ void	pb(void);
 void	ra(void);
 void	rb(void);
 void	rra(void);
+void	rrb(void);
 void	shrink(int *a, int size);
 void	extend(int *a, int size);
 
 //-----	lists	-----//
-void	list_checker(char **s);
+void	list_checker(int ac, char **s);
 void	create_lists(char **s);
 void	calculate_average(void);
 

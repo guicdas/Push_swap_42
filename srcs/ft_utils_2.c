@@ -43,3 +43,17 @@ int	is_a_inverted(void)
 	rra();
 	return (1);
 }
+
+int	is_a_sorted_int(void)
+{
+	int	i;
+
+	i = 0;
+	while (i < data()->size_a - 1)
+	{
+		if (data()->a[i] > data()->a[i + 1])
+			return (0);
+		i++;
+	}
+	return (1);
+}

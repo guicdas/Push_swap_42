@@ -33,18 +33,38 @@ static int		get_bestfriend_equal(int j)
 	return (0);
 }
 
-static void	move_numbers(int i)
+static void	put_b_on_top(int i)
 {
 	int counter;
 
 	counter = i;
-	while (counter--) // melhorar
-		rb();
-	
+	if (counter > data()->size_b / 2)
+	{
+		while (counter++ != data()->size_b + 1)
+			rrb();
+	}
+	else
+	{
+		while (counter--)
+			rb();
+	}
+}
+
+static void	put_a_on_top(int i)
+{
+	int counter;
+
 	counter = get_bestfriend_equal(data()->bf[i]);
-	while (counter--) // melhorar
-		ra();
-	pa();
+	if (counter > data()->size_a / 2)
+	{
+		while (counter++ != data()->size_a + 1)
+			rra();
+	}
+	else
+	{
+		while (counter--)
+			ra();
+	}
 }
 
 static void	organize_lists(void)
@@ -65,19 +85,19 @@ static void	organize_lists(void)
 	{
 		calculate_bestfriends();
 		i = decide_operation();
-		move_numbers(i);
+		put_b_on_top(i);
+		put_a_on_top(i);
+		pa();
 	}
 	while (data()->a[0] != 1)
 		rra();
-	debug();
 }
 
 int	main(int ac, char **av)
 {
-	data()->ac = ac;
-	data()->size_a = (ac - 1);
+	data()->size_a = ac - 1;
 	data()->size_b = 0;
-	list_checker(av);
+	list_checker(ac, av);
 	create_lists(av);
 	organize_lists();
 	free(data()->a);

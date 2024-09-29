@@ -39,16 +39,16 @@ void	create_lists(char **s)
 	int	i;
 
 	i = 1;
-	data()->a = ft_calloc(sizeof(int), data()->ac - 1);
+	data()->a = ft_calloc(sizeof(int), data()->size_a);
 	if (!data()->a)
 		exit(1);
-	data()->b = ft_calloc(sizeof(int), data()->ac - 1);
+	data()->b = ft_calloc(sizeof(int), data()->size_a);
 	if (!data()->b)
 	{
 		free(data()->a);
 		exit(1);
 	}
-	data()->bf = ft_calloc(sizeof(int), data()->ac - 1);
+	data()->bf = ft_calloc(sizeof(int), data()->size_a);
 	if (!data()->bf)
 	{
 		free(data()->b);
