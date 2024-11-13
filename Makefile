@@ -14,29 +14,35 @@ CC				= gcc
 CFLAGS			= -Wall -Wextra -Werror -I./ #-fsanitize=address
 RM				= rm -fr
 
-NAME			= push_swap.a
+OBJS_DIR		= objs
+SRCS_DIR		= srcs
+NAME			= push_swap
 HEADER			= push_swap.h
-EXE				= push_swap
 
-SOURCES			= srcs/ft_push_swap.c srcs/ft_create_lists.c srcs/ft_list_checker.c \
-				srcs/ft_organize_lists.c srcs/ft_five_elements.c srcs/ft_utils_2.c \
-				srcs/ft_instructions_1.c srcs/ft_instructions_2.c srcs/ft_utils_1.c
+SOURCES			= $(SRCS_DIR)/ft_push_swap.c $(SRCS_DIR)/ft_create_lists.c $(SRCS_DIR)/ft_list_checker.c \
+				$(SRCS_DIR)/ft_organize_lists.c $(SRCS_DIR)/ft_five_elements.c $(SRCS_DIR)/ft_utils_2.c \
+				$(SRCS_DIR)/ft_instructions_1.c $(SRCS_DIR)/ft_instructions_2.c $(SRCS_DIR)/ft_utils_1.c
 
-SOURCES_O		= $(SOURCES:srcs/%.c=objs/%.o)
+SOURCES_O		= $(SOURCES:$(SRCS_DIR)/%.c=$(OBJS_DIR)/%.o)
 
 all:			$(NAME)
 
 $(NAME):		$(SOURCES_O)
-	ar -rcs $(NAME) $(SOURCES_O)
+	clear
+	${CC} ${CFLAGS} $(SOURCES_O) -o ${NAME}
 
-objs/%.o: srcs/%.c
+$(OBJS_DIR):
+	mkdir -p objs
+
+$(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c | $(OBJS_DIR)
 	$(CC) $(CFLAGS) -c $^ -o $@
 
-run:	re
-	${CC} ${CFLAGS} ${NAME} -o ${EXE}
+
+%.o: %.c
+	$(CC) $(CFLAGS) -o ${NAME} -c $< -o $@
 
 clean:
-	$(RM) $(SOURCES_O)
+	$(RM) $(OBJS_DIR)
 
 fclean:			clean
 	$(RM) $(NAME)
