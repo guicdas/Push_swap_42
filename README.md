@@ -15,3 +15,4 @@ To compile this project run
 ```bash
   make
 ```
+Also be sure to check out this great [Random number gen + Visualizer](https://github.com/o-reo/push_swap_visualizer)
